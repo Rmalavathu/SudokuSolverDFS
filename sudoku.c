@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "sudoku.h"
 
+//Reads a file and returns a sudoku data type
 Sudoku* readSudoku(char * sudokuFilename){
 
     //Open file
@@ -26,6 +27,7 @@ Sudoku* readSudoku(char * sudokuFilename){
     return s;
 }
 
+//Given a sudoku prints out into the terminal
 void printSudoku(Sudoku * s){
 
     //Two loops to iterate through the sudoku array
@@ -37,6 +39,9 @@ void printSudoku(Sudoku * s){
     }
 }
 
+//Checks if sudoku puzzle is solvable. Does this by checking if 
+//All columns, rows and squares are unique using their respective functions.
+//Unique means all different numbers excluding "."
 bool checkSolved(Sudoku * s){
     // if (checkFilled(s) != true){
     //     return false;
@@ -49,6 +54,7 @@ bool checkSolved(Sudoku * s){
     return false;
 }
 
+//Checks if sudoku puzzle is completely filled (no "."). Uses for loops and checks every value of sudoku puzzle.
 bool checkFilled(Sudoku *s){
 
     char c;
@@ -66,6 +72,7 @@ bool checkFilled(Sudoku *s){
     return true;
 }
 
+//Checks if every row has unique numbers using unique function
 bool differentRows(Sudoku * s){
 
     //uses two for loops and stores each row and checks if they are unique using isUnique function
@@ -83,6 +90,7 @@ bool differentRows(Sudoku * s){
     return true;
 }
 
+//Checks if every column has unique numbers using unique function
 bool differentColumns(Sudoku * s){
 
         //uses two for loops and stores each column and checks if they are unique using isUnique function
@@ -101,6 +109,7 @@ bool differentColumns(Sudoku * s){
     return true;
 }
 
+//Checks if every squares has unique numbers using unique function
 bool differentSquares(Sudoku * s){
 
      //first two for loops finds the starting row and column for each square and the other two for loops iterate throught the squares and puts the values in a temporary array and checks if they are unique using isUnique function
@@ -123,6 +132,7 @@ bool differentSquares(Sudoku * s){
     return true;
 }
 
+//Checks if the given char array has unique numbers excluding "."
 bool isUnique(char * ch){
 
     //uses to loops to check values with each other to no check for dups and ignores "."
@@ -138,6 +148,8 @@ bool isUnique(char * ch){
     return true;
 }
 
+//Finds the next spot ("."). Gets the row and column position and changes the r and c variables
+//passed in. 
 void getEmpty(Sudoku * s, int * r, int * c){
 
     //uses 2 for loops to find the next location of "."
@@ -153,6 +165,11 @@ void getEmpty(Sudoku * s, int * r, int * c){
     }
 }
 
+//The solving sudoku puzzle with DFS. Given the sudoku puzzle, it will check if the puzzle is filled or not.
+//If the puzzle it will return True or else false. Then, it will find the next empty spot using the isEmpty function. Then, it will place
+//a number between 1 and 9. After placing the number it will see if the puzzle is still solvable using the checkSolved function. If it is still
+//solvable it will recursively call the depthFirstSolve function again. If the function returns true then it will also return true. If it goes through all numbers and nothing works
+//It will return false. 
 bool depthFirstSolve(Sudoku * s){
     //base case check to see if the puzzle was filled
     if(checkFilled(s)){
@@ -194,6 +211,7 @@ bool depthFirstSolve(Sudoku * s){
     
 }
 
+//Writes sudoku puzzle into a passed in file
 void writeSudoku(Sudoku * s, char * sudokuFilename){
 
     FILE* inSudoku = fopen(sudokuFilename, "w");

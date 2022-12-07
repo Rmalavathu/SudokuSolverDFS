@@ -15,6 +15,13 @@ test: $(EXEC)
 	./$(EXEC) testcases/sudoku4 output4
 	./$(EXEC) testcases/sudoku5 output5
 
+diff: $(EXEC)
+	diff -w output1 expected/sudoku1
+	diff -w output2 expected/sudoku2
+	diff -w output3 expected/sudoku3
+	diff -w output4 expected/sudoku4
+	diff -w output5 expected/sudoku5	
+
 memory: $(EXEC)
 	$(VALGRIND) --log-file=log1 ./$(EXEC) testcases/sudoku1 output1
 	$(VALGRIND) --log-file=log2 ./$(EXEC) testcases/sudoku2 output2

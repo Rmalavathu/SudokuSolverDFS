@@ -5,7 +5,7 @@
 
 int main(int argc, char * * argv)
 {
-	//Looks for input to have 4 inputs for running file, sudoku input file, and output file
+	//Looks for input to have 3 inputs for running file, sudoku input file, and output file
     if (argc != 3) {
 		fprintf(stderr, "Wrong number of command line args\n");
 		fprintf(stderr, "Usage: ./main [sudokuFile] [pathFile]\n");
